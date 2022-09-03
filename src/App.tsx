@@ -1,23 +1,28 @@
 import React from "react";
+import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
-import { Person, Country } from "./Person";
+// Components
+import Home from "./Components/Home";
+import Login from "./Components/Login";
+import Contact from "./Contact";
+// Redux
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 function App() {
-  const getAge = (name: string) => {
-    return 33;
-  };
-
   return (
     <div className="App">
-      <Person
-        name="Justin"
-        email="justin.ochoa@gmail.com"
-        age={30}
-        isMarried={false}
-        friends={["Jake", "Jessica", "Jerry"]}
-        country={Country.UnitedStates}
-      />
-      <h1>Jakes Age: {getAge("Jake")}</h1>
+      <Provider store={store}>
+        <Link to="/"> Home </Link>
+        <Link to="/login"> Login </Link>
+        <Link to="/contact"> Contact </Link>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </Provider>
     </div>
   );
 }
